@@ -68,7 +68,7 @@ bool CWinSystemGbmGLContext::SetFullScreen(bool fullScreen, RESOLUTION_INFO& res
 
   if (!m_eglContext.TrySwapBuffers())
   {
-    CEGLUtils::LogError("eglSwapBuffers failed");
+    CEGLUtils::Log(LOGERROR, "eglSwapBuffers failed");
     throw std::runtime_error("eglSwapBuffers failed");
   }
 
@@ -97,7 +97,7 @@ void CWinSystemGbmGLContext::PresentRender(bool rendered, bool videoLayer)
     {
       if (!m_eglContext.TrySwapBuffers())
       {
-        CEGLUtils::LogError("eglSwapBuffers failed");
+        CEGLUtils::Log(LOGERROR, "eglSwapBuffers failed");
         throw std::runtime_error("eglSwapBuffers failed");
       }
     }

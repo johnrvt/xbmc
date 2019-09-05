@@ -19,6 +19,8 @@
 #include "guilib/GUIFontTTFGL.h"
 #endif
 
+const char* CWinSystemBase::SETTING_WINSYSTEM_IS_HDR_DISPLAY = "winsystem.ishdrdisplay";
+
 CWinSystemBase::CWinSystemBase()
 {
   m_gfxContext.reset(new CGraphicContext());

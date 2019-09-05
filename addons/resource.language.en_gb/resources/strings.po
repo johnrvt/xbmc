@@ -7104,7 +7104,10 @@ msgctxt "#13435"
 msgid "Enable HQ scalers for scaling above"
 msgstr ""
 
-#empty string with id 13436
+#: system/settings/settings.xml
+msgctxt "#13436"
+msgid "Use display HDR capabilities"
+msgstr ""
 
 #: system/settings/settings.xml
 msgctxt "#13437"
@@ -19042,7 +19045,15 @@ msgctxt "#36294"
 msgid "When sorting music items by artist use sortname e.g. Parton, Dolly rather than name."
 msgstr ""
 
-#empty strings from id 36295 to 36301
+#empty strings from id 36295 to 36298
+
+#. Description of setting with label #13436 "Use display HDR capabilities"
+#: system/settings/settings.xml
+msgctxt "#36299"
+msgid "Switch display into HDR mode if media with HDR information is played.\nIf disabled, HDR information are applied using kodi's internal HDR path"
+msgstr ""
+
+#empty strings from id 36300 to 36301
 
 #: system/settings/settings.xml
 msgctxt "#36302"

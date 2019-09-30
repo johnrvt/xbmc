@@ -13,9 +13,10 @@ DEBUILD_OPTS=${DEBUILD_OPTS:-""}
 BUILD_THREADS=$(( $(nproc)-1))
 
 function usage {
-    echo "$0: This script builds a Kodi debian package from a git repository optimized for Raspberry Pi 2/3.
+    echo "$0: This script builds a Kodi debian package from a git repository optimized for Raspberry Pi 4.
               [-a]       ... Build binary addons only
-              [--armv6]  ... Build for Raspberry Pi 0/1  
+              [--armv6]  ... Build for Raspberry Pi 0/1
+              [--armv7]  ... Build for Raspberry Pi 2/3
               [-j]       ... set concurrency level
 	"
 }
@@ -59,10 +60,13 @@ function setEnv {
 KODI_OPTS="\
 -DVERBOSE=1 \
 -DCORE_SYSTEM_NAME=linux \
--DCORE_PLATFORM_NAME=rbpi \
+-DCORE_PLATFORM_NAME=gbm \
+-DGBM_RENDER_SYSTEM=gles \
+-DENABLE_VAAPI=OFF \
+-DENABLE_VDPAU=OFF \
 -DENABLE_MMAL=ON \
 -DENABLE_OPENGL=OFF \
--DWITH_CPU=${CPU} \
+#-DWITH_CPU=${CPU} \
 -DCMAKE_PREFIX_PATH=/opt/vc \
 -DENABLE_OPENGLES=ON \
 -DCMAKE_BUILD_TYPE=${BUILD_TYPE} \
@@ -103,7 +107,7 @@ KODI_OPTS="\
 -DDEBIAN_PACKAGE_TYPE=${DEBIAN_PACKAGE_TYPE}
 "
 
-EXTRA_FLAGS="-Os -fomit-frame-pointer"
+EXTRA_FLAGS="-Os -fomit-frame-pointer -march=armv8-a+crc+simd -mfpu=neon-fp-armv8 -mfloat-abi=hard -mvectorize-with-neon-quad"
 
     echo "#-------------------------------#"
 }
@@ -216,6 +220,10 @@ do
        ;;
     --armv6)
        CPU="arm1176jzf-s"
+       shift
+       ;;
+    --armv7)
+       CPU="cortex-a7"
        shift
        ;;
     -j)
